@@ -1,0 +1,64 @@
+version: "3"
+
+services:
+ nginx:
+   image: nginx:alpine
+   container_name: nginx01
+   ports:
+     - "8000:8000"
+   volumes:
+     - ./webservice:/webservice
+     - ./config/nginx:/etc/nginx/conf.d
+   depends_on:
+     - ocr_worker
+     - web
+   networks:
+     webnetwork:
+       ipv4_address: 172.22.0.3
+ redis:
+  image: redis:alpine
+  container_name: redis01
+  ports:
+    - "6379:6379"
+  networks:
+    webnetwork:
+      ipv4_address: 172.22.0.4
+ web:
+   image: 1463e09f6851
+   container_name: web01
+   volumes:
+     - ./webservice:/webservice
+   expose:
+     - "8000"
+   networks:
+     webnetwork:
+       ipv4_address: 172.22.0.6
+   links:
+     - redis
+ ocr_worker:
+   image: 6264bdd16093
+   container_name: ocr_worker
+   volumes:
+   - ./ocr_worker:/ocr_worker
+   ports:
+     - "8001:8001"
+   expose:
+     - "8001"
+   networks:
+     webnetwork:
+      ipv4_address: 172.22.0.5
+
+ mongodb:
+   image: mongo:latest
+   ports:
+   - 27017:27017
+   networks:
+     webnetwork:
+      ipv4_address: 172.22.0.2
+
+networks:
+  webnetwork:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.22.0.0/16
