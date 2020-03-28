@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <h2>List of achieved tasks</h2>
+  <table style="width: 100%;
+                padding: 15px;
+                text-align: left">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Result</th>
+      </tr>
+      <tr>
+          {% for task in task %}
+            <tr>
+                <td>{{ task['_id] }}</td>
+                <td>{{ task['job name'] }}</td>
+                <td>{{ task['result] }}</td>
+            </tr>
+          {% endfor %}
+      </tr>
+  </table>
+{% endblock %}

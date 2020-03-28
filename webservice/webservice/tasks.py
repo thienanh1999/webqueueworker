@@ -43,8 +43,13 @@ class DatabaseManager():
 
     def get_all_data(self):
         collection = self.database["task"]
+
+        data = []
+
         for x in collection.find():
-            print(x)
+            data.append(x)
+
+        return data
 
     def drop_collection(self, collection_name):
         collection = self.database[collection_name]
@@ -63,6 +68,18 @@ class LayoutProcessor():
             }
             LayoutProcessor.__instance__ = TadashiLayout(weights_path=weights_path)
         return LayoutProcessor.__instance__
+
+
+def chunkIt(seq, num):
+    avg = len(seq) / float(num)
+    out = []
+    last = 0.0
+
+    while last < len(seq):
+        out.append(seq[int(last):int(last + avg)])
+        last += avg
+
+    return out
 
 
 @app.task
@@ -86,7 +103,8 @@ def process(task_name, filepath):
         'image': image_in_byte
     }
 
-    items = str(result)
+    result = chunkIt(result, 20)
+    items = str(result[0])
     data = {
         'items': items
     }
@@ -103,5 +121,11 @@ def process(task_name, filepath):
         'result': data['result'],
     }
     database_manager = DatabaseManager.get_instance()
+    # database_manager.drop_collection("task")
     database_manager.save_data(my_job)
-    # database_manager.get_all_data()
+    # print(database_manager.get_all_data())
+
+
+def get_list_of_achieved_task():
+    database_manager = DatabaseManager.get_instance()
+    return database_manager.get_all_data()

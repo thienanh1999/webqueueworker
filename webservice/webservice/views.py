@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from .tasks import process
+from .tasks import process, get_list_of_achieved_task
 from django.core.files.storage import FileSystemStorage
 
 
@@ -17,3 +17,9 @@ def upload(request):
         process(filename, path)
 
     return render(request, "upload.html", {})
+
+
+def list_task(request):
+    tasks = get_list_of_achieved_task()
+
+    return render(request, "tasks.html", {'tasks': tasks})

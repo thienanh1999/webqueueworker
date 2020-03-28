@@ -30,4 +30,4 @@ RUN mkdir /model
 COPY ./webservice/Model /model/
 
 # CMD will run when this dockerfile is running
-CMD ["sh", "-c", "python manage.py collectstatic --no-input; python manage.py migrate; gunicorn webservice.wsgi -b 0.0.0.0:8000 & celery worker --app=webservice.tasks"]
+CMD ["sh", "-c", "python manage.py collectstatic --no-input; python manage.py migrate; gunicorn webservice.wsgi -b 0.0.0.0:8000 & celery worker --app=webservice.tasks -P gevent -E"]

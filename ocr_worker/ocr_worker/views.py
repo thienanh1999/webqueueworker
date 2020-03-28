@@ -4,7 +4,8 @@ from django.http.response import JsonResponse
 from PIL import Image
 import json
 from ocr import OnmtOCR
-import threading
+from concurrent.futures import ThreadPoolExecutor
+import asyncio
 
 
 class OCRProcessor():
@@ -38,21 +39,17 @@ def format_string(item):
 
 
 def predict(item, image):
-    if item['type'] == 'cell':
+    if item['type'] == 'cell' and len(item['contain']) == 0:
         return {'item': item, 'result': ''}
 
     model = OCRProcessor.get_instance()
     location = item['location']
     ocr_image = get_cropped_image(image, location)
-    try:
-        result = model.process(ocr_image)
-        print(result)
-        return {'item': item, 'result': result}
-    except Exception as e:
-        print('Throw Exception')
+    result = model.process(ocr_image)
+    print(result)
+    return {'item': item, 'result': result}
 
 
-# TODO: 1. multithread 2. cell ocr
 @csrf_exempt
 def process(request):
     if request.method == 'POST':
@@ -67,15 +64,9 @@ def process(request):
 
         response = []
 
-        for item in items:
-            t = threading.Thread(target=predict, args=(item, image1))
-            t1 = threading.Thread(target=predict, args=(item, image1))
-
-            t.start()
-            t1.start()
-
-            t.join()
-            t1.join()
+        with ThreadPoolExecutor(max_workers=3) as executor:
+            for item in items:
+                response.append(executor.submit(predict, (item), (image1)).result())
 
         return JsonResponse({'success': True, 'result': response})
     return HttpResponse('Welcome')

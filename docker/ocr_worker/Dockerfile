@@ -23,7 +23,7 @@ RUN apt-get -yq update
 RUN apt-get -yqq install ssh
 RUN apt-get install git
 RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
-RUN --mount=type=ssh pip install lib-ocr[onmt]@git+ssh://git@github.com/Cinnamon/lib-ocr.git@master
+RUN --mount=type=ssh pip install lib-ocr[onmt,jeff]@git+ssh://git@github.com/Cinnamon/lib-ocr.git@master
 
 # Get model weight
 RUN mkdir /model

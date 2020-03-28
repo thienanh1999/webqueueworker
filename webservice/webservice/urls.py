@@ -18,4 +18,5 @@ from . import views
 
 urlpatterns = [
     path('upload', views.upload, name='upload'),
+    path('tasks', views.list_task, name='tasks'),
 ]

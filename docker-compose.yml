@@ -24,7 +24,7 @@ services:
     webnetwork:
       ipv4_address: 172.22.0.4
  web:
-   image: 1463e09f6851
+   image: aa93a5f8ea54
    container_name: web01
    volumes:
      - ./webservice:/webservice
@@ -36,7 +36,7 @@ services:
    links:
      - redis
  ocr_worker:
-   image: 6264bdd16093
+   image: 935768dfb9e3
    container_name: ocr_worker
    volumes:
    - ./ocr_worker:/ocr_worker

@@ -2,7 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d4665569-62a7-4f23-a153-bd86fd3f28cc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ocr_worker/thread_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webservice/templates/tasks.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/ocr_worker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/ocr_worker/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/webservice/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/webservice/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ocr_worker/ocr_worker/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ocr_worker/ocr_worker/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ocr_worker/requirements.pip" beforeDir="false" afterPath="$PROJECT_DIR$/ocr_worker/requirements.pip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_13ZrZFG.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_3PTgIc6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_4JPtkar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_AEGZmfG.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_C3XqzmT.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_JLDEGai.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_NGVtYi6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_Pa72c3K.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_QFb1VeC.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_Qz5gMv6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_THx84qL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_Wvz3DyH.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_XIQPrEU.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_ZcZ8ryt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_cIptwE0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_fmJhKjU.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_gx7pRgl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_ldKFbkg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_lusKyzc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/data/sample_wJ0hmSI.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/requirements.pip" beforeDir="false" afterPath="$PROJECT_DIR$/webservice/requirements.pip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/webservice/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/webservice/webservice/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/webservice/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/webservice/webservice/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webservice/webservice/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webservice/webservice/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,18 +68,20 @@
   </component>
   <component name="JupyterTrust" id="1457499c-0953-4c0b-a2df-ccfeb69e9ddf" />
   <component name="ProjectId" id="1Z1RPcK3gJZQuJTHpxiLS2IwFgc" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore_missing_gitignore" value="true" />
-    <property name="last_opened_file_path" value="D:/cinnamon_onboarding" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../cinnamon_onboarding" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -97,7 +131,9 @@
       <workItem from="1584972832790" duration="5460000" />
       <workItem from="1585034909265" duration="8012000" />
       <workItem from="1585043744450" duration="60000" />
-      <workItem from="1585043833527" duration="299000" />
+      <workItem from="1585043833527" duration="1979000" />
+      <workItem from="1585063230151" duration="2960000" />
+      <workItem from="1585293855664" duration="15525000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <created>1584093982276</created>
@@ -142,29 +178,33 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="243" y="116" width="1482" height="872" key="DiffContextDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1584093966270" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1585035464424">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1585403244475">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1585035464424" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1585403244475" />
+    <state x="633" y="123" key="RollbackChangesDialog" timestamp="1585306987873">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="633" y="123" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1585306987873" />
     <state x="344" y="110" key="SettingsEditor" timestamp="1584282360983">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="344" y="110" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1584282360983" />
     <state x="482" y="187" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1584006155775" />
-    <state x="482" y="276" key="com.intellij.ide.util.TipDialog" timestamp="1585043837568">
+    <state x="482" y="276" key="com.intellij.ide.util.TipDialog" timestamp="1585293968697">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="482" y="276" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585043837568" />
+    <state x="482" y="276" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585293968697" />
     <state x="649" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1584081493769" />
     <state x="575" y="348" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584957981564">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="575" y="348" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1584957981564" />
     <state x="761" y="472" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.1053@67.27.1853.1053" timestamp="1584092211258" />
-    <state x="488" y="180" width="672" height="531" key="search.everywhere.popup" timestamp="1585041317362">
+    <state x="488" y="180" width="672" height="531" key="search.everywhere.popup" timestamp="1585295002491">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="488" y="180" width="672" height="531" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1585041317362" />
+    <state x="488" y="180" width="672" height="531" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1585295002491" />
     <state x="656" y="257" width="672" height="678" key="search.everywhere.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1584005071328" />
   </component>
 </project>
