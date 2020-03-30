@@ -2,10 +2,10 @@ from __future__ import absolute_import, unicode_literals
 import logging
 import requests
 import pymongo
-import json
 from layout.tadashi.model import TadashiLayout
 import cv2
 import io
+from bson.objectid import ObjectId
 
 from .celery import app
 
@@ -43,7 +43,6 @@ class DatabaseManager():
 
     def get_all_data(self):
         collection = self.database["task"]
-
         data = []
 
         for x in collection.find():
@@ -54,6 +53,13 @@ class DatabaseManager():
     def drop_collection(self, collection_name):
         collection = self.database[collection_name]
         collection.drop()
+
+    def get_task_by_id(self, task_id):
+        collection = self.database["task"]
+        query = {"_id": ObjectId(task_id)}
+        x = collection.find_one(query)
+
+        return x
 
 
 class LayoutProcessor():
@@ -82,6 +88,18 @@ def chunkIt(seq, num):
     return out
 
 
+def get_cropped_image(image, location):
+    x1 = location[0][0]
+    x2 = location[1][0]
+    y1 = location[0][1]
+    y2 = location[2][1]
+
+    cropped_image = image[y1:y2, x1:x2]
+
+    return cropped_image
+
+
+# TODO: async for process all path of tasks
 @app.task
 # Auto layout process
 def process(task_name, filepath):
@@ -103,7 +121,17 @@ def process(task_name, filepath):
         'image': image_in_byte
     }
 
-    result = chunkIt(result, 20)
+    # Save all cropped images
+    my_image = cv2.imread(filepath)
+    folder = filepath.split('.')[0]
+    for id in range(len(result)):
+        item = result[id]
+        cropped_image = get_cropped_image(my_image, item['location'])
+        path = folder + "_image-{:03d}.png".format(id+1)
+        result[id]['path'] = path
+        cv2.imwrite(path, cropped_image)
+
+    result = chunkIt(result, len(result)/20)
     items = str(result[0])
     data = {
         'items': items
@@ -116,8 +144,8 @@ def process(task_name, filepath):
 
     # Save task to database
     my_job = {
-        'job name': task_name,
-        'file path': filepath,
+        'job_name': task_name,
+        'file_path': filepath,
         'result': data['result'],
     }
     database_manager = DatabaseManager.get_instance()
@@ -129,3 +157,8 @@ def process(task_name, filepath):
 def get_list_of_achieved_task():
     database_manager = DatabaseManager.get_instance()
     return database_manager.get_all_data()
+
+
+def get_task_by_id(task_id):
+    database_manager = DatabaseManager.get_instance()
+    return database_manager.get_task_by_id(task_id)

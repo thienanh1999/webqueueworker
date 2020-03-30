@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <img src={{image}} width="500px">
+  <table style="width: 100%;
+                padding: 15px;
+                text-align: left">
+    <tr>
+      <td>Image</td>
+      <td>Location</td>
+      <td>Result</td>
+    </tr>
+    <tr>
+      <td>
+        {% for item in result %}
+            <tr>
+                <td style="width: 500px">
+                  <img src={{item.item.path}}>
+                </td>
+                <td>{{ item.item.location }}</td>
+                <td>{{ item.result.text }}</td>
+            </tr>
+          {% endfor %}
+      </td>
+    </tr>
+  </table>
+{% endblock %}

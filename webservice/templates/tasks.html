@@ -8,16 +8,16 @@
                 padding: 15px;
                 text-align: left">
       <tr>
-        <th>Id</th>
         <th>Name</th>
         <th>Result</th>
       </tr>
       <tr>
-          {% for task in task %}
+          {% for task in tasks %}
             <tr>
-                <td>{{ task['_id] }}</td>
-                <td>{{ task['job name'] }}</td>
-                <td>{{ task['result] }}</td>
+                <td>
+                    <a href="/task_detail/{{ task.id }}">{{ task.job_name }}</a>
+                </td>
+                <td>{{ task.result }}</td>
             </tr>
           {% endfor %}
       </tr>

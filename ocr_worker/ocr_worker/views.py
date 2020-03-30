@@ -46,7 +46,6 @@ def predict(item, image):
     location = item['location']
     ocr_image = get_cropped_image(image, location)
     result = model.process(ocr_image)
-    print(result)
     return {'item': item, 'result': result}
 
 
@@ -64,7 +63,7 @@ def process(request):
 
         response = []
 
-        with ThreadPoolExecutor(max_workers=3) as executor:
+        with ThreadPoolExecutor(max_workers=8) as executor:
             for item in items:
                 response.append(executor.submit(predict, (item), (image1)).result())
 
