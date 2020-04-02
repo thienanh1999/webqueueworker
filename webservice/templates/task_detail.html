@@ -9,18 +9,18 @@
                 text-align: left">
     <tr>
       <td>Image</td>
-      <td>Location</td>
       <td>Result</td>
+      <td>Confidence</td>
     </tr>
     <tr>
       <td>
         {% for item in result %}
             <tr>
                 <td style="width: 500px">
-                  <img src={{item.item.path}}>
+                  <img src={{item.path}}>
                 </td>
-                <td>{{ item.item.location }}</td>
                 <td>{{ item.result.text }}</td>
+                <td>{{ item.result.confidence_by_field }}</td>
             </tr>
           {% endfor %}
       </td>

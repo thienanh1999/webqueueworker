@@ -5,7 +5,6 @@ from PIL import Image
 import json
 from ocr import OnmtOCR
 from concurrent.futures import ThreadPoolExecutor
-import asyncio
 
 
 class OCRProcessor():
@@ -69,3 +68,14 @@ def process(request):
 
         return JsonResponse({'success': True, 'result': response})
     return HttpResponse('Welcome')
+
+
+@csrf_exempt
+def ocr_single(request):
+    image = request.FILES['image']
+    image1 = Image.open(image)
+
+    model = OCRProcessor.get_instance()
+    result = model.process(image1)
+
+    return JsonResponse({'success': True, 'result': result})

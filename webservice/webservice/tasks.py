@@ -6,6 +6,8 @@ from layout.tadashi.model import TadashiLayout
 import cv2
 import io
 from bson.objectid import ObjectId
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 
 from .celery import app
 
@@ -99,7 +101,44 @@ def get_cropped_image(image, location):
     return cropped_image
 
 
-# TODO: async for process all path of tasks
+def post_request(ocr_worker, data):
+    files = {
+        'image': data['image']
+    }
+    response = requests.post(ocr_worker, files=files)
+    result = response.json()['result']
+    result = {
+        'path': data['path'],
+        'result': result
+    }
+
+    return result
+
+
+async def send_async_request(image_list, result):
+    with ThreadPoolExecutor(max_workers=12) as executor:
+        loop = asyncio.get_event_loop()
+        tasks = [
+            loop.run_in_executor(
+                executor,
+                post_request,
+                *('http://172.22.0.5:8001/single', data)
+            )
+            for data in image_list
+        ]
+        result.extend(await asyncio.gather(*tasks))
+
+
+def send_request_to_ocr_worker(image_list):
+    result = list()
+
+    loop = asyncio.get_event_loop()
+    future = asyncio.ensure_future(send_async_request(image_list, result))
+    loop.run_until_complete(future)
+
+    return result
+
+
 @app.task
 # Auto layout process
 def process(task_name, filepath):
@@ -117,12 +156,9 @@ def process(task_name, filepath):
         file = image.read()
         image_in_byte = io.BytesIO(file)
 
-    image = {
-        'image': image_in_byte
-    }
-
     # Save all cropped images
     my_image = cv2.imread(filepath)
+    image_list = []
     folder = filepath.split('.')[0]
     for id in range(len(result)):
         item = result[id]
@@ -131,22 +167,26 @@ def process(task_name, filepath):
         result[id]['path'] = path
         cv2.imwrite(path, cropped_image)
 
-    result = chunkIt(result, len(result)/20)
-    items = str(result[0])
-    data = {
-        'items': items
-    }
+        image = open(path, 'rb')
+        file = image.read()
+        image_in_byte = io.BytesIO(file)
+        image_list.append(
+            {
+                'image': image_in_byte,
+                'path': path,
+            }
+        )
 
-    # Get OCR result
-    response = requests.post('http://172.22.0.5:8001/process', data=data, files=image)
+    image_list = chunkIt(image_list, 3)
 
-    data = response.json()
+    data = send_request_to_ocr_worker(image_list[0])
+    data = data.append(send_request_to_ocr_worker(image_list[1]))
 
     # Save task to database
     my_job = {
         'job_name': task_name,
         'file_path': filepath,
-        'result': data['result'],
+        'result': data,
     }
     database_manager = DatabaseManager.get_instance()
     # database_manager.drop_collection("task")

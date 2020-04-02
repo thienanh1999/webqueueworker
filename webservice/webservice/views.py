@@ -28,10 +28,9 @@ def list_task(request):
 
 
 def task_detail(request, task_id):
-    # task_id = '5e81758027e1da705b876436'
     task = get_task_by_id(task_id)
     task['file_path'] = '../' + task['file_path']
     for i in range(len(task['result'])):
-        task['result'][i]['item']['path'] = '../' + task['result'][i]['item']['path']
+        task['result'][i]['path'] = '../' + task['result'][i]['path']
 
     return render(request, "task_detail.html", {'image': task['file_path'], 'result': task['result']})
